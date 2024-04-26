@@ -6,13 +6,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tribeadsapi.tribeads.models.Comunity;
 import com.tribeadsapi.tribeads.models.Country;
+import com.tribeadsapi.tribeads.models.IsBelongsToRelation;
 import com.tribeadsapi.tribeads.models.IsSpeakingRelation;
 import com.tribeadsapi.tribeads.models.Language;
 import com.tribeadsapi.tribeads.models.User;
+import com.tribeadsapi.tribeads.repository.ComunityRepository;
 import com.tribeadsapi.tribeads.repository.CountryRepository;
 import com.tribeadsapi.tribeads.repository.LanguageRepository;
 import com.tribeadsapi.tribeads.repository.UserRepository;
+import com.tribeadsapi.tribeads.request.CreateComunityRequest;
 import com.tribeadsapi.tribeads.request.CreateLanguageRequest;
 import com.tribeadsapi.tribeads.request.CreateUserRequest;
 
@@ -26,6 +30,9 @@ public class UserService {
 
     @Autowired
     LanguageRepository languageRepository;
+
+    @Autowired
+    ComunityRepository comunityRepository;
 
     public User createUser(CreateUserRequest user) {
         Country country = new Country();
@@ -47,6 +54,19 @@ public class UserService {
                 isSpeakingRelation.add(isSpeaking);
             }
         }
+        List<IsBelongsToRelation> isBelongsToRelation = new ArrayList<>();
+        if (user.getComunities() != null) {
+            for (CreateComunityRequest createComunityRequest : user.getComunities()) {
+                Comunity newComunity = new Comunity();
+                newComunity.setComunityName(createComunityRequest.getComunityName());
+                newComunity.setTopic(createComunityRequest.getTopic());
+                comunityRepository.save(newComunity);
+                IsBelongsToRelation isBelongsTo = new IsBelongsToRelation();
+                isBelongsTo.setComunity(newComunity);
+                isBelongsTo.setMarks(isBelongsTo.getMarks());
+                isBelongsToRelation.add(isBelongsTo);
+            }
+        }
 
         User newUser = new User();
         newUser.setName(user.getName());
@@ -57,6 +77,7 @@ public class UserService {
         newUser.setPassword(user.getPassword());
         newUser.setCountry(country);
         newUser.setLanguages(isSpeakingRelation);
+        newUser.setComunities(isBelongsToRelation);
         userRepository.save(newUser);
 
         return newUser;

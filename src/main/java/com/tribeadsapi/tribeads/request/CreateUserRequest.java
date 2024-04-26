@@ -15,6 +15,7 @@ public class CreateUserRequest {
     private String password;
     private Country country;
     private List<CreateLanguageRequest> languages;
+    private List<CreateComunityRequest> comunities;
 
     public String getName() {
         return name;
@@ -78,6 +79,14 @@ public class CreateUserRequest {
 
     public void setLanguages(List<CreateLanguageRequest> languages) {
         this.languages = languages;
+    }
+
+    public List<CreateComunityRequest> getComunities() {
+        return comunities;
+    }
+
+    public void setComunities(List<CreateComunityRequest> comunities) {
+        this.comunities = comunities;
     }
 
 }

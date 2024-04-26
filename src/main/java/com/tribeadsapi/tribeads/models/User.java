@@ -40,6 +40,9 @@ public class User {
     @Relationship(type = "SPEAKS", direction = Relationship.Direction.OUTGOING)
     private List<IsSpeakingRelation> languages;
 
+    @Relationship(type = "BELONGS_TO", direction = Relationship.Direction.OUTGOING)
+    private List<IsBelongsToRelation> comunities;
+
     public Long getUserId() {
         return userId;
     }
@@ -110,6 +113,14 @@ public class User {
 
     public void setLanguages(List<IsSpeakingRelation> languages) {
         this.languages = languages;
+    }
+
+    public List<IsBelongsToRelation> getComunities() {
+        return comunities;
+    }
+
+    public void setComunities(List<IsBelongsToRelation> comunities) {
+        this.comunities = comunities;
     }
 
 }
