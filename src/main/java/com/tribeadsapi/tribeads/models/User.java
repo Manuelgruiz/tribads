@@ -1,6 +1,7 @@
 package com.tribeadsapi.tribeads.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -35,6 +36,9 @@ public class User {
 
     @Relationship(type = "LIVED_IN", direction = Relationship.Direction.OUTGOING)
     private Country country;
+
+    @Relationship(type = "SPEAKS", direction = Relationship.Direction.OUTGOING)
+    private List<IsSpeakingRelation> languages;
 
     public Long getUserId() {
         return userId;
@@ -98,6 +102,14 @@ public class User {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public List<IsSpeakingRelation> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<IsSpeakingRelation> languages) {
+        this.languages = languages;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.tribeadsapi.tribeads.request;
 
 import java.util.Date;
+import java.util.List;
 
 import com.tribeadsapi.tribeads.models.Country;
 
@@ -13,6 +14,7 @@ public class CreateUserRequest {
     private String email;
     private String password;
     private Country country;
+    private List<CreateLanguageRequest> languages;
 
     public String getName() {
         return name;
@@ -68,6 +70,14 @@ public class CreateUserRequest {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public List<CreateLanguageRequest> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<CreateLanguageRequest> languages) {
+        this.languages = languages;
     }
 
 }
