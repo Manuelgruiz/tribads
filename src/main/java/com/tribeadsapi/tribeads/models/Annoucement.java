@@ -1,6 +1,7 @@
 package com.tribeadsapi.tribeads.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
@@ -35,6 +36,9 @@ public class Annoucement {
 
     @Relationship(type = "EMITED_IN", direction = Relationship.Direction.OUTGOING)
     private Country country;
+
+    @Relationship(type = "TARGET_TO", direction = Relationship.Direction.OUTGOING)
+    private List<IsTargetRelation> comunities;
 
     public Long getAnnoucementId() {
         return annoucementId;
@@ -98,6 +102,14 @@ public class Annoucement {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public List<IsTargetRelation> getComunities() {
+        return comunities;
+    }
+
+    public void setComunities(List<IsTargetRelation> comunities) {
+        this.comunities = comunities;
     }
 
 }

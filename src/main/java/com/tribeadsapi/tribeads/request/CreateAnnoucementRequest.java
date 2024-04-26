@@ -1,7 +1,9 @@
 package com.tribeadsapi.tribeads.request;
 
 import java.util.Date;
+import java.util.List;
 
+import com.tribeadsapi.tribeads.models.Comunity;
 import com.tribeadsapi.tribeads.models.Country;
 
 public class CreateAnnoucementRequest {
@@ -13,6 +15,7 @@ public class CreateAnnoucementRequest {
     private Date dateExpired;
     private String description;
     private Country country;
+    private List<Comunity> comunities;
 
     public String getTitle() {
         return title;
@@ -68,6 +71,14 @@ public class CreateAnnoucementRequest {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public List<Comunity> getComunities() {
+        return comunities;
+    }
+
+    public void setComunities(List<Comunity> comunities) {
+        this.comunities = comunities;
     }
 
 }
