@@ -6,5 +6,5 @@ import com.tribeadsapi.tribeads.models.User;
 
 @Repository
 public interface UserRepository extends Neo4jRepository<User, Long> {
-
+    User findByEmail(String email);
 }
