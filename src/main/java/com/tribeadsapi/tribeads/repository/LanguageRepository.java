@@ -7,5 +7,5 @@ import com.tribeadsapi.tribeads.models.Language;
 
 @Repository
 public interface LanguageRepository extends Neo4jRepository<Language, Long> {
-
+    Language findByLanguageNameAndLevel(String languageName, Integer level);
 }

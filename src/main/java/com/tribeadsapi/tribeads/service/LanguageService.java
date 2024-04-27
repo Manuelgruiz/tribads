@@ -20,4 +20,9 @@ public class LanguageService {
         return newLanguage;
     }
 
+    public Language getLanguageByNameAndLevel(String languageName, Integer level) {
+        return languageRepository.findByLanguageNameAndLevel(languageName, level);
+
+    }
+
 }
