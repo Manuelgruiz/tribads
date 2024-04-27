@@ -95,4 +95,13 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public String deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+        return "User deleted";
+    }
+
 }

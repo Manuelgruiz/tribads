@@ -1,5 +1,7 @@
 package com.tribeadsapi.tribeads.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,15 @@ public class LanguageService {
     public Language getLanguageByNameAndLevel(String languageName, Integer level) {
         return languageRepository.findByLanguageNameAndLevel(languageName, level);
 
+    }
+
+    public String deleteService(Long serviceId) {
+        languageRepository.deleteById(serviceId);
+        return "Service deleted";
+    }
+
+    public List<Language> getAllLanguages() {
+        return languageRepository.findAll();
     }
 
 }

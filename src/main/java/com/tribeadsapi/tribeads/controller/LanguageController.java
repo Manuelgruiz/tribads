@@ -1,6 +1,9 @@
 package com.tribeadsapi.tribeads.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,5 +30,15 @@ public class LanguageController {
     @GetMapping("/getLanguageByNameAndLevel/{languageName}/{level}")
     public Language getLenguageByNameAndLevel(@PathVariable String languageName, @PathVariable Integer level) {
         return languageService.getLanguageByNameAndLevel(languageName, level);
+    }
+
+    @GetMapping("/getAllLanguages")
+    public List<Language> getAllLanguages() {
+        return languageService.getAllLanguages();
+    }
+
+    @DeleteMapping("/deleteService/{serviceId}")
+    public String deleteService(@PathVariable Long serviceId) {
+        return languageService.deleteService(serviceId);
     }
 }

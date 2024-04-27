@@ -1,5 +1,7 @@
 package com.tribeadsapi.tribeads.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +12,8 @@ import com.tribeadsapi.tribeads.models.User;
 import com.tribeadsapi.tribeads.request.CreateUserFollow;
 import com.tribeadsapi.tribeads.request.CreateUserRequest;
 import com.tribeadsapi.tribeads.service.UserService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -45,4 +49,13 @@ public class UserController {
         return user1;
     }
 
+    @GetMapping("/getAllUsers")
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    @DeleteMapping("/delete/{userId}")
+    public String deleteUser(@PathVariable Long userId) {
+        return userService.deleteUser(userId);
+    }
 }

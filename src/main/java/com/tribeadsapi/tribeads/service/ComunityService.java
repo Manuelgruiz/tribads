@@ -1,5 +1,7 @@
 package com.tribeadsapi.tribeads.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,15 @@ public class ComunityService {
 
     public Comunity getComunityByName(String name) {
         return comunityRepository.findByComunityName(name);
+    }
+
+    public List<Comunity> getAllComunities() {
+        return comunityRepository.findAll();
+    }
+
+    public String deleteComunity(Long comunityId) {
+        comunityRepository.deleteById(comunityId);
+        return "Comunity deleted";
     }
 
 }
