@@ -16,7 +16,12 @@ public class ComunityService {
         Comunity newComunity = new Comunity();
         newComunity.setComunityName(comunity.getComunityName());
         newComunity.setTopic(comunity.getTopic());
+        comunityRepository.save(newComunity);
         return newComunity;
+    }
+
+    public Comunity getComunityByName(String name) {
+        return comunityRepository.findByComunityName(name);
     }
 
 }

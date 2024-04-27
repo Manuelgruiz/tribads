@@ -57,4 +57,8 @@ public class AnnoucementService {
         return newAnnoucement;
     }
 
+    public Annoucement getAnnoucementByTitle(String title) {
+        return annoucementRespository.findByTitle(title);
+    }
+
 }

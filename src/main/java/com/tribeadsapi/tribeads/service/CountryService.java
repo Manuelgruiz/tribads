@@ -21,4 +21,8 @@ public class CountryService {
         return newCountry;
     }
 
+    public Country getCountryByName(String name) {
+        return countryRepository.findByCountryName(name);
+    }
+
 }

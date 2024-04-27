@@ -1,6 +1,8 @@
 package com.tribeadsapi.tribeads.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,11 @@ public class AnnoucementController {
     @PostMapping("/create")
     public Annoucement createAnnoucement(@RequestBody CreateAnnoucementRequest annoucement) {
         return annoucementService.createAnnoucement(annoucement);
+    }
+
+    @GetMapping("getByTitle/{title}")
+    public Annoucement getAnnoucementByTitle(@PathVariable String title) {
+        return annoucementService.getAnnoucementByTitle(title);
     }
 
 }

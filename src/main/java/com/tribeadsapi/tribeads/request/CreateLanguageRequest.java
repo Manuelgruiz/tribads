@@ -6,8 +6,6 @@ public class CreateLanguageRequest {
 
     private Integer level;
 
-    private Long marks;
-
     public String getLanguageName() {
         return languageName;
     }
@@ -22,14 +20,6 @@ public class CreateLanguageRequest {
 
     public void setLevel(Integer level) {
         this.level = level;
-    }
-
-    public Long getMarks() {
-        return marks;
-    }
-
-    public void setMarks(Long marks) {
-        this.marks = marks;
     }
 
 }

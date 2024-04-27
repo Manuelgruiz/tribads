@@ -50,7 +50,6 @@ public class UserService {
                 languageRepository.save(newLanguage);
                 IsSpeakingRelation isSpeaking = new IsSpeakingRelation();
                 isSpeaking.setLanguage(newLanguage);
-                isSpeaking.setMarks(createLanguageRequest.getMarks());
                 isSpeakingRelation.add(isSpeaking);
             }
         }

@@ -6,5 +6,6 @@ import com.tribeadsapi.tribeads.models.Country;
 
 @Repository
 public interface CountryRepository extends Neo4jRepository<Country, Long> {
+    Country findByCountryName(String name);
 
 }
