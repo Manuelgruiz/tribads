@@ -10,6 +10,8 @@ import com.tribeadsapi.tribeads.models.User;
 import com.tribeadsapi.tribeads.request.CreateUserFollow;
 import com.tribeadsapi.tribeads.request.CreateUserRequest;
 import com.tribeadsapi.tribeads.service.UserService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -45,4 +47,8 @@ public class UserController {
         return user1;
     }
 
+    @DeleteMapping("/delete/{userId}")
+    public String deleteUser(@PathVariable Long userId) {
+        return userService.deleteUser(userId);
+    }
 }

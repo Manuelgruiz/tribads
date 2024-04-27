@@ -25,4 +25,9 @@ public class LanguageService {
 
     }
 
+    public String deleteService(Long serviceId) {
+        languageRepository.deleteById(serviceId);
+        return "Service deleted";
+    }
+
 }

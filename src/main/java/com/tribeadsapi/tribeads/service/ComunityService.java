@@ -24,4 +24,9 @@ public class ComunityService {
         return comunityRepository.findByComunityName(name);
     }
 
+    public String deleteComunity(Long comunityId) {
+        comunityRepository.deleteById(comunityId);
+        return "Comunity deleted";
+    }
+
 }

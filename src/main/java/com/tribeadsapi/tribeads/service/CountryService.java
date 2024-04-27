@@ -25,4 +25,9 @@ public class CountryService {
         return countryRepository.findByCountryName(name);
     }
 
+    public String deleteCountry(Long countryId) {
+        countryRepository.deleteById(countryId);
+        return "Country deleted";
+    }
+
 }

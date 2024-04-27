@@ -95,4 +95,9 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public String deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+        return "User deleted";
+    }
+
 }

@@ -61,4 +61,9 @@ public class AnnoucementService {
         return annoucementRespository.findByTitle(title);
     }
 
+    public String deleteAnnoucement(Long annoucementId) {
+        annoucementRespository.deleteById(annoucementId);
+        return "Annoucement deleted";
+    }
+
 }
