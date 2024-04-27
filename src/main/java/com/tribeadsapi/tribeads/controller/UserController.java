@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tribeadsapi.tribeads.models.User;
+import com.tribeadsapi.tribeads.request.CreateUserFollow;
 import com.tribeadsapi.tribeads.request.CreateUserRequest;
 import com.tribeadsapi.tribeads.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,16 @@ public class UserController {
     @GetMapping("/getUserByEmail/{email}")
     public User getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
+    }
+
+    @PostMapping("/followUser")
+    public User createFollow(@RequestBody CreateUserFollow request) {
+        User user1 = userService.getUserById(request.getUserId1());
+        User user2 = userService.getUserById(request.getUserId2());
+
+        user1.getFollowers().add(user2);
+        userService.save(user1);
+        return user1;
     }
 
 }

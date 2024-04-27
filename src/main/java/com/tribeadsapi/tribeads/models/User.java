@@ -43,6 +43,9 @@ public class User {
     @Relationship(type = "BELONGS_TO", direction = Relationship.Direction.OUTGOING)
     private List<IsBelongsToRelation> comunities;
 
+    @Relationship(type = "FOLLOWS", direction = Relationship.Direction.OUTGOING)
+    private List<User> followers;
+
     public Long getUserId() {
         return userId;
     }
@@ -121,6 +124,14 @@ public class User {
 
     public void setComunities(List<IsBelongsToRelation> comunities) {
         this.comunities = comunities;
+    }
+
+    public List<User> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<User> followers) {
+        this.followers = followers;
     }
 
 }
