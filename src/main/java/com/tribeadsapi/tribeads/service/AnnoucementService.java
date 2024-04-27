@@ -13,6 +13,7 @@ import com.tribeadsapi.tribeads.models.IsTargetRelation;
 import com.tribeadsapi.tribeads.repository.AnnoucementRespository;
 import com.tribeadsapi.tribeads.repository.CountryRepository;
 import com.tribeadsapi.tribeads.request.CreateAnnoucementRequest;
+import com.tribeadsapi.tribeads.request.GetAnnoucementByCreationDate;
 
 @Service
 public class AnnoucementService {
@@ -68,6 +69,10 @@ public class AnnoucementService {
 
     public List<Annoucement> getAllAnnoucements() {
         return annoucementRespository.findAll();
+    }
+
+    public List<Annoucement> getAnnoucementByDates(GetAnnoucementByCreationDate dates) {
+        return annoucementRespository.findByDatePostedIn(dates.getDatesPosted());
     }
 
 }

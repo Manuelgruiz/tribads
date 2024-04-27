@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tribeadsapi.tribeads.models.Annoucement;
 import com.tribeadsapi.tribeads.request.CreateAnnoucementRequest;
+import com.tribeadsapi.tribeads.request.GetAnnoucementByCreationDate;
 import com.tribeadsapi.tribeads.service.AnnoucementService;
 
 @RestController
@@ -34,6 +35,11 @@ public class AnnoucementController {
     @GetMapping("getAllAnnoucements")
     public List<Annoucement> getAllAnnoucements() {
         return annoucementService.getAllAnnoucements();
+    }
+
+    @GetMapping("/getAnnoucementByDate")
+    public List<Annoucement> getMethodName(@RequestBody GetAnnoucementByCreationDate dates) {
+        return annoucementService.getAnnoucementByDates(dates);
     }
 
     @DeleteMapping("/deleteAnnoucement/{annoucementId}")
