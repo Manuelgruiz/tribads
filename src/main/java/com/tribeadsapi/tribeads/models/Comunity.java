@@ -5,6 +5,11 @@ import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Node(labels = { "Comunity" })
 public class Comunity {
 
@@ -17,29 +22,5 @@ public class Comunity {
 
     @Property("topic")
     private String topic;
-
-    public Long getComunityId() {
-        return comunityId;
-    }
-
-    public void setComunityId(Long comunityId) {
-        this.comunityId = comunityId;
-    }
-
-    public String getComunityName() {
-        return comunityName;
-    }
-
-    public void setComunityName(String comunityName) {
-        this.comunityName = comunityName;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
 
 }

@@ -9,6 +9,11 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Node(labels = { "User" })
 public class User {
 
@@ -45,93 +50,5 @@ public class User {
 
     @Relationship(type = "FOLLOWS", direction = Relationship.Direction.OUTGOING)
     private List<User> followers;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public Integer getYear() {
-        return year;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public List<IsSpeakingRelation> getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(List<IsSpeakingRelation> languages) {
-        this.languages = languages;
-    }
-
-    public List<IsBelongsToRelation> getComunities() {
-        return comunities;
-    }
-
-    public void setComunities(List<IsBelongsToRelation> comunities) {
-        this.comunities = comunities;
-    }
-
-    public List<User> getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(List<User> followers) {
-        this.followers = followers;
-    }
 
 }

@@ -5,6 +5,11 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.RelationshipProperties;
 import org.springframework.data.neo4j.core.schema.TargetNode;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @RelationshipProperties
 public class IsBelongsToRelation {
 
@@ -14,21 +19,5 @@ public class IsBelongsToRelation {
 
     @TargetNode
     private Comunity comunity;
-
-    public Long getMarks() {
-        return marks;
-    }
-
-    public void setMarks(Long marks) {
-        this.marks = marks;
-    }
-
-    public Comunity getComunity() {
-        return comunity;
-    }
-
-    public void setComunity(Comunity comunity) {
-        this.comunity = comunity;
-    }
 
 }
