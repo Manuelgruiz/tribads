@@ -1,5 +1,7 @@
 package com.tribeadsapi.tribeads.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,11 @@ public class ComunityController {
     @GetMapping("getByName/{name}")
     public Comunity getComunityByName(@PathVariable String name) {
         return comunityService.getComunityByName(name);
+    }
+
+    @GetMapping("getAllComunities")
+    public List<Comunity> getAllComunities() {
+        return comunityService.getAllComunities();
     }
 
     @DeleteMapping("/deleteComunity/{comunityId}")

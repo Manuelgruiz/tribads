@@ -66,4 +66,8 @@ public class AnnoucementService {
         return "Annoucement deleted";
     }
 
+    public List<Annoucement> getAllAnnoucements() {
+        return annoucementRespository.findAll();
+    }
+
 }

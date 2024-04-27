@@ -1,5 +1,7 @@
 package com.tribeadsapi.tribeads.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,11 @@ public class AnnoucementController {
     @GetMapping("getByTitle/{title}")
     public Annoucement getAnnoucementByTitle(@PathVariable String title) {
         return annoucementService.getAnnoucementByTitle(title);
+    }
+
+    @GetMapping("getAllAnnoucements")
+    public List<Annoucement> getAllAnnoucements() {
+        return annoucementService.getAllAnnoucements();
     }
 
     @DeleteMapping("/deleteAnnoucement/{annoucementId}")

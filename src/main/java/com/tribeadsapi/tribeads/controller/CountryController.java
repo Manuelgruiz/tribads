@@ -1,5 +1,7 @@
 package com.tribeadsapi.tribeads.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,11 @@ public class CountryController {
     @GetMapping("/getByCountryName/{name}")
     public Country getCountryByName(@PathVariable String name) {
         return countryService.getCountryByName(name);
+    }
+
+    @GetMapping("/getAllCountries")
+    public List<Country> getAllCountries() {
+        return countryService.getAllCountries();
     }
 
     @DeleteMapping("/delete/{countryId}")
