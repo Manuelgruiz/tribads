@@ -1,23 +1,15 @@
 package com.tribeadsapi.tribeads.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tribeadsapi.tribeads.models.Comunity;
-import com.tribeadsapi.tribeads.models.Country;
-import com.tribeadsapi.tribeads.models.IsBelongsToRelation;
-import com.tribeadsapi.tribeads.models.IsSpeakingRelation;
-import com.tribeadsapi.tribeads.models.Language;
 import com.tribeadsapi.tribeads.models.User;
 import com.tribeadsapi.tribeads.repository.ComunityRepository;
 import com.tribeadsapi.tribeads.repository.CountryRepository;
 import com.tribeadsapi.tribeads.repository.LanguageRepository;
 import com.tribeadsapi.tribeads.repository.UserRepository;
-import com.tribeadsapi.tribeads.request.CreateComunityRequest;
-import com.tribeadsapi.tribeads.request.CreateLanguageRequest;
 import com.tribeadsapi.tribeads.request.CreateUserRequest;
 
 @Service
