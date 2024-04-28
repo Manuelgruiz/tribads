@@ -15,12 +15,19 @@ public class CountryService {
     CountryRepository countryRepository;
 
     public Country createCountry(CreateCountryRequest country) {
+        if (countryRepository.findByCountryName(country.getCountryName()) != null) {
+            return null;
+        }
         Country newCountry = new Country();
         newCountry.setCountryName(country.getCountryName());
         newCountry.setCapital(country.getCapital());
         newCountry.setPopulation(country.getPopulation());
         countryRepository.save(newCountry);
         return newCountry;
+    }
+
+    public Country getCountryById(Long id) {
+        return countryRepository.findById(id).get();
     }
 
     public Country getCountryByName(String name) {

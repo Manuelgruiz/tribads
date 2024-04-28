@@ -35,37 +35,6 @@ public class UserService {
     ComunityRepository comunityRepository;
 
     public User createUser(CreateUserRequest user) {
-        Country country = new Country();
-        country.setCountryName(user.getCountry().getCountryName());
-        country.setCapital(user.getCountry().getCapital());
-        country.setPopulation(user.getCountry().getPopulation());
-        countryRepository.save(country);
-
-        List<IsSpeakingRelation> isSpeakingRelation = new ArrayList<>();
-        if (user.getLanguages() != null) {
-            for (CreateLanguageRequest createLanguageRequest : user.getLanguages()) {
-                Language newLanguage = new Language();
-                newLanguage.setLanguageName(createLanguageRequest.getLanguageName());
-                newLanguage.setLevel(createLanguageRequest.getLevel());
-                languageRepository.save(newLanguage);
-                IsSpeakingRelation isSpeaking = new IsSpeakingRelation();
-                isSpeaking.setLanguage(newLanguage);
-                isSpeakingRelation.add(isSpeaking);
-            }
-        }
-        List<IsBelongsToRelation> isBelongsToRelation = new ArrayList<>();
-        if (user.getComunities() != null) {
-            for (CreateComunityRequest createComunityRequest : user.getComunities()) {
-                Comunity newComunity = new Comunity();
-                newComunity.setComunityName(createComunityRequest.getComunityName());
-                newComunity.setTopic(createComunityRequest.getTopic());
-                comunityRepository.save(newComunity);
-                IsBelongsToRelation isBelongsTo = new IsBelongsToRelation();
-                isBelongsTo.setComunity(newComunity);
-                isBelongsTo.setMarks(isBelongsTo.getMarks());
-                isBelongsToRelation.add(isBelongsTo);
-            }
-        }
 
         User newUser = new User();
         newUser.setName(user.getName());
@@ -74,9 +43,6 @@ public class UserService {
         newUser.setBirthDate(user.getBirthDate());
         newUser.setEmail(user.getEmail());
         newUser.setPassword(user.getPassword());
-        newUser.setCountry(country);
-        newUser.setLanguages(isSpeakingRelation);
-        newUser.setComunities(isBelongsToRelation);
         userRepository.save(newUser);
 
         return newUser;

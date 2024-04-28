@@ -24,6 +24,10 @@ public class LanguageController {
 
     @PostMapping("/create")
     public Language createLanguage(@RequestBody CreateLanguageRequest languageRequest) {
+        if (languageService.getLanguageByNameAndLevel(languageRequest.getLanguageName(),
+                languageRequest.getLevel()) != null) {
+            return null;
+        }
         return languageService.createLanguage(languageRequest);
     }
 
