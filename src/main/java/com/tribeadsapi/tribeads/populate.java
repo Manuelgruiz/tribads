@@ -51,16 +51,24 @@ public class populate {
     @PostConstruct
     @Transactional
     public void generateData() {
-        // Iniciar datos de entidades
 
-        createUser();
-        createLanguages();
-        createCountry();
-        createCommunity();
-        createAnnoucement();
+        // Elegir cantidad de datos a generar
+        Integer usuarios = 100;
+        Integer idiomas = 10;
+        Integer paises = 10;
+        Integer comunidades = 10;
+        Integer anuncios = 100;
 
-        // Crear relaciones
+        // Generar datos
+        createData(usuarios, idiomas, paises, comunidades, anuncios);
+    }
 
+    public void createData(Integer usuarios, Integer idiomas, Integer paises, Integer comunidades, Integer anuncios) {
+        createUser(usuarios);
+        createLanguages(idiomas);
+        createCountry(paises);
+        createCommunity(comunidades);
+        createAnnoucement(anuncios);
         createFollows();
         createSpeaks();
         createBelongsTo();
@@ -69,10 +77,10 @@ public class populate {
         createAnnoucementInCommunity();
     }
 
-    public void createUser() {
+    public void createUser(Integer n) {
         List<User> users = new ArrayList<>();
         // Crear Users
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < n; i++) {
             CreateUserRequest user = new CreateUserRequest();
             user.setName(faker.name().fullName());
             user.setGender(faker.demographic().sex());
@@ -85,13 +93,13 @@ public class populate {
         }
     }
 
-    public void createLanguages() {
+    public void createLanguages(Integer n) {
         List<Language> languages = new ArrayList<>();
         // Crear Languages
         List<String> languageNames = Arrays.asList("Spanish", "English", "French", "German", "Italian", "Portuguese",
                 "Russian", "Chinese", "Japanese", "Korean");
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < n; i++) {
             CreateLanguageRequest language = new CreateLanguageRequest();
             language.setLanguageName(languageNames.get(i));
             language.setLevel(faker.number().numberBetween(1, 10));
@@ -100,10 +108,10 @@ public class populate {
         }
     }
 
-    public void createCountry() {
+    public void createCountry(Integer n) {
         List<Country> countries = new ArrayList<>();
         // Crear Countries
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < n; i++) {
             CreateCountryRequest country = new CreateCountryRequest();
             country.setCountryName(faker.address().country());
             country.setCapital(faker.address().city());
@@ -113,10 +121,10 @@ public class populate {
         }
     }
 
-    public void createCommunity() {
+    public void createCommunity(Integer n) {
         List<Comunity> comunities = new ArrayList<>();
         // Crear Comunities
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < n; i++) {
             CreateComunityRequest comunity = new CreateComunityRequest();
             comunity.setComunityName(faker.team().name());
             comunity.setTopic(faker.lorem().sentence());
@@ -125,10 +133,10 @@ public class populate {
         }
     }
 
-    public void createAnnoucement() {
+    public void createAnnoucement(Integer n) {
         List<Annoucement> annoucements = new ArrayList<>();
         // Crear Annoucements
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < n; i++) {
             CreateAnnoucementRequest annoucement = new CreateAnnoucementRequest();
             annoucement.setTitle(faker.lorem().sentence());
             annoucement.setRevenue(faker.number().numberBetween(1000L, 100000L));

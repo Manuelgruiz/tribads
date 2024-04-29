@@ -22,6 +22,7 @@ import com.tribeadsapi.tribeads.service.UserService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
@@ -58,7 +59,7 @@ public class UserController {
         return userService.getUserByEmail(email);
     }
 
-    @PostMapping("/followUser")
+    @PatchMapping("/followUser")
     public User createFollow(@RequestBody CreateUserFollow request) {
         User user1 = userService.getUserById(request.getUserId1());
         User user2 = userService.getUserById(request.getUserId2());
@@ -68,7 +69,7 @@ public class UserController {
         return user1;
     }
 
-    @PostMapping("/connectCountry/{userId}/{countryId}")
+    @PatchMapping("/connectCountry/{userId}/{countryId}")
     public User connectCountry(@PathVariable Long userId, @PathVariable Long countryId) {
         User user = userService.getUserById(userId);
         user.setCountry(countryService.getCountryById(countryId));
@@ -76,7 +77,7 @@ public class UserController {
         return user;
     }
 
-    @PostMapping("/connectCommunity/{userId}/{communityId}")
+    @PatchMapping("/connectCommunity/{userId}/{communityId}")
     public User connectCommunity(@PathVariable Long userId, @PathVariable Long communityId) {
         User user = userService.getUserById(userId);
         Comunity comunity = comunityService.getComunityById(communityId);
@@ -88,7 +89,7 @@ public class UserController {
         return user;
     }
 
-    @PostMapping("/connectLenguage/{userId}/{languageId}")
+    @PatchMapping("/connectLenguage/{userId}/{languageId}")
     public User connectLenguage(@PathVariable Long userId, @PathVariable Long languageId) {
         User user = userService.getUserById(userId);
         Language language = languageService.getLanguageById(languageId);
