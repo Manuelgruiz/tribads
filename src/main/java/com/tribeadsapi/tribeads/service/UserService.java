@@ -62,4 +62,7 @@ public class UserService {
         return "User deleted";
     }
 
+    public User getMostInfluentialPolyglotUser() {
+        return userRepository.findMostInfluentialPolyglotUser();
+    }
 }

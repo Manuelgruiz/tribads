@@ -42,4 +42,9 @@ public class ComunityController {
         return comunityService.deleteComunity(comunityId);
     }
 
+    @GetMapping("/getComunityWithMostUsers")
+    public Comunity getComunityWithMostUsers() {
+        return comunityService.getComunityWithMostUsers();
+    }
+
 }

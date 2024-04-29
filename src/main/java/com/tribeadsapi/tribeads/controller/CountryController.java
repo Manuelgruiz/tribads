@@ -41,4 +41,9 @@ public class CountryController {
         return countryService.deleteCountry(countryId);
     }
 
+    @GetMapping("/getCountryWithMostUsers")
+    public Country getCountryWithMostUsers() {
+        return countryService.getCountryWithMostUsers();
+    }
+
 }

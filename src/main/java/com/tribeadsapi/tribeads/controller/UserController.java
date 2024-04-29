@@ -104,6 +104,11 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/mostInfluentialPolyglotUser")
+    public User getMostInfluentialPolyglotUser() {
+        return userService.getMostInfluentialPolyglotUser();
+    }
+
     @DeleteMapping("/delete/{userId}")
     public String deleteUser(@PathVariable Long userId) {
         return userService.deleteUser(userId);
