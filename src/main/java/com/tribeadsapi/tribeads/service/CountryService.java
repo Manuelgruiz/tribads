@@ -43,4 +43,8 @@ public class CountryService {
         return "Country deleted";
     }
 
+    public Country getCountryWithMostUsers() {
+        return countryRepository.findCountryWithMostUsers();
+    }
+
 }

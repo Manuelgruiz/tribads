@@ -45,4 +45,9 @@ public class LanguageController {
     public String deleteService(@PathVariable Long serviceId) {
         return languageService.deleteService(serviceId);
     }
+
+    @GetMapping("/getLanguageWithMostUsers")
+    public Language getLanguageWithMostUsers() {
+        return languageService.getLanguageWithMostUsers();
+    }
 }

@@ -40,4 +40,8 @@ public class LanguageService {
         return languageRepository.findAll();
     }
 
+    public Language getLanguageWithMostUsers() {
+        return languageRepository.findMostSpokenLanguage();
+    }
+
 }

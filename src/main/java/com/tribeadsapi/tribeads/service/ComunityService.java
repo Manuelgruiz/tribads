@@ -39,4 +39,8 @@ public class ComunityService {
         return "Comunity deleted";
     }
 
+    public Comunity getComunityWithMostUsers() {
+        return comunityRepository.findComunityWithMostUsers();
+    }
+
 }
