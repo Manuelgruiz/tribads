@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,9 @@ public class AnnoucementController {
 
     @PostMapping("/create")
     public Annoucement createAnnoucement(@RequestBody CreateAnnoucementRequest annoucement) {
+        if (annoucement.getDateExpired().getTime() < annoucement.getDatePosted().getTime()) {
+            return null;
+        }
         if (annoucementService.getAnnoucementByTitle(annoucement.getTitle()) != null) {
             return null;
         }
@@ -55,7 +59,7 @@ public class AnnoucementController {
         return annoucementService.getAnnoucementByDates(dates);
     }
 
-    @PostMapping("/connectCountryToAnnoucement/{annoucementId}/{countryId}")
+    @PatchMapping("/connectCountryToAnnoucement/{annoucementId}/{countryId}")
     public Annoucement connenctCountryToAnnoucement(Long annoucementId, Long countryId) {
         Annoucement annoucement = annoucementService.getAnnoucementById(annoucementId);
         annoucement.setCountry(countryService.getCountryById(countryId));
@@ -63,7 +67,7 @@ public class AnnoucementController {
         return annoucement;
     }
 
-    @PostMapping("/connectCommunityToAnnoucement/{annoucementId}/{comunityId}")
+    @PatchMapping("/connectCommunityToAnnoucement/{annoucementId}/{comunityId}")
     public Annoucement connectCommunityToAnnoucement(Long annoucementId, Long comunityId) {
         Annoucement annoucement = annoucementService.getAnnoucementById(annoucementId);
         Comunity comunity = comunityService.getComunityById(comunityId);
