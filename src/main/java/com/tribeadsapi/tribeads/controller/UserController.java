@@ -8,9 +8,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tribeadsapi.tribeads.models.Comunity;
+import com.tribeadsapi.tribeads.models.IsBelongsToRelation;
+import com.tribeadsapi.tribeads.models.IsSpeakingRelation;
+import com.tribeadsapi.tribeads.models.Language;
 import com.tribeadsapi.tribeads.models.User;
 import com.tribeadsapi.tribeads.request.CreateUserFollow;
 import com.tribeadsapi.tribeads.request.CreateUserRequest;
+import com.tribeadsapi.tribeads.service.ComunityService;
+import com.tribeadsapi.tribeads.service.CountryService;
+import com.tribeadsapi.tribeads.service.LanguageService;
 import com.tribeadsapi.tribeads.service.UserService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,8 +31,20 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    CountryService countryService;
+
+    @Autowired
+    ComunityService comunityService;
+
+    @Autowired
+    LanguageService languageService;
+
     @PostMapping("/create")
     public User createuser(@RequestBody CreateUserRequest user) {
+        if (userService.getUserByEmail(user.getEmail()) != null) {
+            return null;
+        }
         return userService.createUser(user);
     }
 
@@ -47,6 +66,37 @@ public class UserController {
         user1.getFollowers().add(user2);
         userService.save(user1);
         return user1;
+    }
+
+    @PostMapping("/connectCountry/{userId}/{countryId}")
+    public User connectCountry(@PathVariable Long userId, @PathVariable Long countryId) {
+        User user = userService.getUserById(userId);
+        user.setCountry(countryService.getCountryById(countryId));
+        userService.save(user);
+        return user;
+    }
+
+    @PostMapping("/connectCommunity/{userId}/{communityId}")
+    public User connectCommunity(@PathVariable Long userId, @PathVariable Long communityId) {
+        User user = userService.getUserById(userId);
+        Comunity comunity = comunityService.getComunityById(communityId);
+        IsBelongsToRelation isBelongsTo = new IsBelongsToRelation();
+        isBelongsTo.setComunity(comunity);
+        isBelongsTo.setMarks(isBelongsTo.getMarks());
+        user.getComunities().add(isBelongsTo);
+        userService.save(user);
+        return user;
+    }
+
+    @PostMapping("/connectLenguage/{userId}/{languageId}")
+    public User connectLenguage(@PathVariable Long userId, @PathVariable Long languageId) {
+        User user = userService.getUserById(userId);
+        Language language = languageService.getLanguageById(languageId);
+        IsSpeakingRelation isSpeaking = new IsSpeakingRelation();
+        isSpeaking.setLanguage(language);
+        user.getLanguages().add(isSpeaking);
+        userService.save(user);
+        return user;
     }
 
     @GetMapping("/getAllUsers")

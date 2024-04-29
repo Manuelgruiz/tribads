@@ -14,6 +14,10 @@ public class LanguageService {
     @Autowired
     LanguageRepository languageRepository;
 
+    public Language getLanguageById(Long id) {
+        return languageRepository.findById(id).get();
+    }
+
     public Language createLanguage(CreateLanguageRequest language) {
         Language newLanguage = new Language();
         newLanguage.setLanguageName(language.getLanguageName());

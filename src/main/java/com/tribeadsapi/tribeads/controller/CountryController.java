@@ -22,7 +22,7 @@ public class CountryController {
     CountryService countryService;
 
     @PostMapping("/create")
-    public Country createuser(@RequestBody CreateCountryRequest countryRequest) {
+    public Country createCountry(@RequestBody CreateCountryRequest countryRequest) {
         return countryService.createCountry(countryRequest);
     }
 

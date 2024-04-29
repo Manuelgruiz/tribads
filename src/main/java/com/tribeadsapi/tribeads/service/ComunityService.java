@@ -14,6 +14,10 @@ public class ComunityService {
     @Autowired
     ComunityRepository comunityRepository;
 
+    public Comunity getComunityById(Long id) {
+        return comunityRepository.findById(id).get();
+    }
+
     public Comunity createComunity(CreateComunityRequest comunity) {
         Comunity newComunity = new Comunity();
         newComunity.setComunityName(comunity.getComunityName());
