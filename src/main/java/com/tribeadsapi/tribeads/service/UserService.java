@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tribeadsapi.tribeads.controller.FollowerDTO;
 import com.tribeadsapi.tribeads.models.User;
 import com.tribeadsapi.tribeads.repository.ComunityRepository;
 import com.tribeadsapi.tribeads.repository.CountryRepository;
@@ -63,6 +64,12 @@ public class UserService {
     }
 
     public User getMostInfluentialPolyglotUser() {
-        return userRepository.findMostInfluentialPolyglotUser();
+        Long id = userRepository.findMostInfluentialPolyglotUser().getUserId();
+        return userRepository.findById(id).get();
     }
+
+    public List<FollowerDTO> getFollowersByEmail(String email) {
+        return userRepository.findFollowersByEmail(email);
+    }
+
 }

@@ -1,7 +1,6 @@
 package com.tribeadsapi.tribeads.request;
 
 import java.util.Date;
-import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +15,5 @@ public class CreateUserRequest {
     private Date birthDate;
     private String email;
     private String password;
-    private List<CreateLanguageRequest> languages;
 
 }
