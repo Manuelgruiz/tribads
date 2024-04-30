@@ -1,5 +1,6 @@
 package com.tribeadsapi.tribeads.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,35 +51,37 @@ public class UserController {
     }
 
     @GetMapping("/getUserById/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    public UserDTO getUserById(@PathVariable Long id) {
+        User user = userService.getUserById(id);
+        return new UserDTO(user);
     }
 
     @GetMapping("/getUserByEmail/{email}")
-    public User getUserByEmail(@PathVariable String email) {
-        return userService.getUserByEmail(email);
+    public UserDTO getUserByEmail(@PathVariable String email) {
+        User user = userService.getUserByEmail(email);
+        return new UserDTO(user);
     }
 
     @PatchMapping("/followUser")
-    public User createFollow(@RequestBody CreateUserFollow request) {
+    public UserDTO createFollow(@RequestBody CreateUserFollow request) {
         User user1 = userService.getUserById(request.getUserId1());
         User user2 = userService.getUserById(request.getUserId2());
 
         user1.getFollowers().add(user2);
         userService.save(user1);
-        return user1;
+        return new UserDTO(user1);
     }
 
     @PatchMapping("/connectCountry/{userId}/{countryId}")
-    public User connectCountry(@PathVariable Long userId, @PathVariable Long countryId) {
+    public UserDTO connectCountry(@PathVariable Long userId, @PathVariable Long countryId) {
         User user = userService.getUserById(userId);
         user.setCountry(countryService.getCountryById(countryId));
         userService.save(user);
-        return user;
+        return new UserDTO(user);
     }
 
     @PatchMapping("/connectCommunity/{userId}/{communityId}")
-    public User connectCommunity(@PathVariable Long userId, @PathVariable Long communityId) {
+    public UserDTO connectCommunity(@PathVariable Long userId, @PathVariable Long communityId) {
         User user = userService.getUserById(userId);
         Comunity comunity = comunityService.getComunityById(communityId);
         IsBelongsToRelation isBelongsTo = new IsBelongsToRelation();
@@ -86,28 +89,39 @@ public class UserController {
         isBelongsTo.setMarks(isBelongsTo.getMarks());
         user.getComunities().add(isBelongsTo);
         userService.save(user);
-        return user;
+        return new UserDTO(user);
     }
 
     @PatchMapping("/connectLenguage/{userId}/{languageId}")
-    public User connectLenguage(@PathVariable Long userId, @PathVariable Long languageId) {
+    public UserDTO connectLenguage(@PathVariable Long userId, @PathVariable Long languageId) {
         User user = userService.getUserById(userId);
         Language language = languageService.getLanguageById(languageId);
         IsSpeakingRelation isSpeaking = new IsSpeakingRelation();
         isSpeaking.setLanguage(language);
         user.getLanguages().add(isSpeaking);
         userService.save(user);
-        return user;
+        return new UserDTO(user);
     }
 
     @GetMapping("/getAllUsers")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public List<UserDTO> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        List<UserDTO> usersDTO = new ArrayList<>();
+        for (User user : users) {
+            usersDTO.add(new UserDTO(user));
+        }
+        return usersDTO;
     }
 
     @GetMapping("/mostInfluentialPolyglotUser")
-    public User getMostInfluentialPolyglotUser() {
-        return userService.getMostInfluentialPolyglotUser();
+    public UserDTO getMostInfluentialPolyglotUser() {
+        User user = userService.getMostInfluentialPolyglotUser();
+        return new UserDTO(user);
+    }
+
+    @GetMapping("/getFollowers/{email}")
+    public List<FollowerDTO> getFollowers(@PathVariable String email) {
+        return userService.getFollowersByEmail(email);
     }
 
     @DeleteMapping("/delete/{userId}")

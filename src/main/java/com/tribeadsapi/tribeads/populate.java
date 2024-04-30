@@ -6,6 +6,7 @@ import com.tribeadsapi.tribeads.controller.ComunityController;
 import com.tribeadsapi.tribeads.controller.CountryController;
 import com.tribeadsapi.tribeads.controller.LanguageController;
 import com.tribeadsapi.tribeads.controller.UserController;
+import com.tribeadsapi.tribeads.controller.UserDTO;
 import com.tribeadsapi.tribeads.models.Annoucement;
 import com.tribeadsapi.tribeads.models.Comunity;
 import com.tribeadsapi.tribeads.models.Country;
@@ -60,7 +61,7 @@ public class populate {
         Integer anuncios = 100;
 
         // Generar datos
-        createData(usuarios, idiomas, paises, comunidades, anuncios);
+        // createData(usuarios, idiomas, paises, comunidades, anuncios);
     }
 
     public void createData(Integer usuarios, Integer idiomas, Integer paises, Integer comunidades, Integer anuncios) {
@@ -150,11 +151,11 @@ public class populate {
     }
 
     public void createFollows() {
-        List<User> users = userController.getAllUsers();
-        for (User user : users) {
+        List<UserDTO> users = userController.getAllUsers();
+        for (UserDTO user : users) {
             int n = faker.number().numberBetween(0, 5);
             for (int i = 0; i < n; i++) {
-                User userToFollow = users.get(faker.number().numberBetween(0, users.size()));
+                UserDTO userToFollow = users.get(faker.number().numberBetween(0, users.size()));
                 if (!userToFollow.getUserId().equals(user.getUserId())) {
                     CreateUserFollow createUserFollow = new CreateUserFollow();
                     createUserFollow.setUserId1(user.getUserId());
@@ -167,9 +168,9 @@ public class populate {
     }
 
     public void createSpeaks() {
-        List<User> users = userController.getAllUsers();
+        List<UserDTO> users = userController.getAllUsers();
         List<Language> languages = languageController.getAllLanguages();
-        for (User user : users) {
+        for (UserDTO user : users) {
             int n = faker.number().numberBetween(1, 3);
             for (int i = 0; i < n; i++) {
                 Language language = languages.get(faker.number().numberBetween(0, languages.size()));
@@ -179,18 +180,18 @@ public class populate {
     }
 
     public void createBelongsTo() {
-        List<User> users = userController.getAllUsers();
+        List<UserDTO> users = userController.getAllUsers();
         List<Country> countries = countryController.getAllCountries();
-        for (User user : users) {
+        for (UserDTO user : users) {
             Country country = countries.get(faker.number().numberBetween(0, countries.size()));
             userController.connectCountry(user.getUserId(), country.getCountryId());
         }
     }
 
     public void createIsMemberOf() {
-        List<User> users = userController.getAllUsers();
+        List<UserDTO> users = userController.getAllUsers();
         List<Comunity> comunities = comunityController.getAllComunities();
-        for (User user : users) {
+        for (UserDTO user : users) {
             int n = faker.number().numberBetween(1, 3);
             for (int i = 0; i < n; i++) {
                 Comunity comunity = comunities.get(faker.number().numberBetween(0, comunities.size()));
