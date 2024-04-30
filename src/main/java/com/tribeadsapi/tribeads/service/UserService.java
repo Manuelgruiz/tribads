@@ -3,6 +3,7 @@ package com.tribeadsapi.tribeads.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tribeadsapi.tribeads.controller.FollowerDTO;
@@ -27,6 +28,9 @@ public class UserService {
     @Autowired
     ComunityRepository comunityRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     public User createUser(CreateUserRequest user) {
 
         User newUser = new User();
@@ -35,7 +39,8 @@ public class UserService {
         newUser.setYear(user.getYear());
         newUser.setBirthDate(user.getBirthDate());
         newUser.setEmail(user.getEmail());
-        newUser.setPassword(user.getPassword());
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        newUser.setPassword(hashedPassword);
         userRepository.save(newUser);
 
         return newUser;
