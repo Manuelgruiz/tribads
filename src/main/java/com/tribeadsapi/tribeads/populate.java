@@ -61,10 +61,11 @@ public class populate {
         Integer anuncios = 100;
 
         // Generar datos
-        // createData(usuarios, idiomas, paises, comunidades, anuncios);
+        createData(usuarios, idiomas, paises, comunidades, anuncios);
     }
 
-    public void createData(Integer usuarios, Integer idiomas, Integer paises, Integer comunidades, Integer anuncios) {
+    public void createData(Integer usuarios, Integer idiomas, Integer paises,
+            Integer comunidades, Integer anuncios) {
         createUser(usuarios);
         createLanguages(idiomas);
         createCountry(paises);
@@ -85,7 +86,8 @@ public class populate {
             CreateUserRequest user = new CreateUserRequest();
             user.setName(faker.name().fullName());
             user.setGender(faker.demographic().sex());
-            user.setYear(faker.number().numberBetween(1950, 2022)); // Ajusta los rangos según tus necesidades
+            user.setYear(faker.number().numberBetween(1950, 2022));
+
             user.setBirthDate(faker.date().birthday());
             user.setEmail(faker.internet().emailAddress());
             user.setPassword(faker.internet().password());
@@ -97,7 +99,8 @@ public class populate {
     public void createLanguages(Integer n) {
         List<Language> languages = new ArrayList<>();
         // Crear Languages
-        List<String> languageNames = Arrays.asList("Spanish", "English", "French", "German", "Italian", "Portuguese",
+        List<String> languageNames = Arrays.asList("Spanish", "English", "French",
+                "German", "Italian", "Portuguese",
                 "Russian", "Chinese", "Japanese", "Korean");
 
         for (int i = 0; i < n; i++) {
@@ -155,7 +158,8 @@ public class populate {
         for (UserDTO user : users) {
             int n = faker.number().numberBetween(0, 5);
             for (int i = 0; i < n; i++) {
-                UserDTO userToFollow = users.get(faker.number().numberBetween(0, users.size()));
+                UserDTO userToFollow = users.get(faker.number().numberBetween(0,
+                        users.size()));
                 if (!userToFollow.getUserId().equals(user.getUserId())) {
                     CreateUserFollow createUserFollow = new CreateUserFollow();
                     createUserFollow.setUserId1(user.getUserId());
@@ -173,7 +177,8 @@ public class populate {
         for (UserDTO user : users) {
             int n = faker.number().numberBetween(1, 3);
             for (int i = 0; i < n; i++) {
-                Language language = languages.get(faker.number().numberBetween(0, languages.size()));
+                Language language = languages.get(faker.number().numberBetween(0,
+                        languages.size()));
                 userController.connectLenguage(user.getUserId(), language.getLanguageId());
             }
         }
@@ -183,7 +188,8 @@ public class populate {
         List<UserDTO> users = userController.getAllUsers();
         List<Country> countries = countryController.getAllCountries();
         for (UserDTO user : users) {
-            Country country = countries.get(faker.number().numberBetween(0, countries.size()));
+            Country country = countries.get(faker.number().numberBetween(0,
+                    countries.size()));
             userController.connectCountry(user.getUserId(), country.getCountryId());
         }
     }
@@ -194,7 +200,8 @@ public class populate {
         for (UserDTO user : users) {
             int n = faker.number().numberBetween(1, 3);
             for (int i = 0; i < n; i++) {
-                Comunity comunity = comunities.get(faker.number().numberBetween(0, comunities.size()));
+                Comunity comunity = comunities.get(faker.number().numberBetween(0,
+                        comunities.size()));
                 userController.connectCommunity(user.getUserId(), comunity.getComunityId());
             }
         }
@@ -204,8 +211,10 @@ public class populate {
         List<Annoucement> annoucements = annoucementController.getAllAnnoucements();
         List<Country> countries = countryController.getAllCountries();
         for (Annoucement annoucement : annoucements) {
-            Country country = countries.get(faker.number().numberBetween(0, countries.size()));
-            annoucementController.connenctCountryToAnnoucement(annoucement.getAnnoucementId(), country.getCountryId());
+            Country country = countries.get(faker.number().numberBetween(0,
+                    countries.size()));
+            annoucementController.connenctCountryToAnnoucement(annoucement.getAnnoucementId(),
+                    country.getCountryId());
         }
     }
 
@@ -215,7 +224,8 @@ public class populate {
         for (Annoucement annoucement : annoucements) {
             int n = faker.number().numberBetween(1, 3);
             for (int i = 0; i < n; i++) {
-                Comunity comunity = comunities.get(faker.number().numberBetween(0, comunities.size()));
+                Comunity comunity = comunities.get(faker.number().numberBetween(0,
+                        comunities.size()));
                 annoucementController.connectCommunityToAnnoucement(annoucement.getAnnoucementId(),
                         comunity.getComunityId());
             }
